@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" data-auto-replace-svg="nest"></script>
+    <link rel="stylesheet" href="form3.css">
+    <title>Form page</title>
+</head>
+<body>
+    <section class="container">
+        <div class="transparent">
+            <div class="box top">
+                <h2>Already have an Account ?</h2>
+                <button class="btn sign-in-btn">Sign In</button>
+            </div>
+            <div class="box bottom">
+                <h2>Don't have an Account ?</h2>
+                <button class="sign-up-btn">Sign Up</button>
+            </div>
+        </div>
+        <div class="form-box">
+            <div class="sign-in">
+                <form>
+                    <h3>Sign In</h3>
+                    <input type="text" placeholder="Username">
+                    <input type="password" placeholder="Password">
+                    <button class="btn btn2">Login</button>
+                    <a href="#" class="fgt-pass">Forgot Password ?</a>
+                </form>
+            </div>
+            <div class="sign-up">
+                <form id="form">
+                    <h3>Sign Up</h3>
+                    <div class="form-input">
+                        <input type="text" class="username" placeholder="Username">
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error</small>
+                    </div>
+                    <div class="form-input">
+                        <input type="email" class="email" placeholder="Email Address">
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error</small>
+                    </div>
+                    <div class="form-input">
+                        <input type="password" class="pass" placeholder="Password">
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error</small>
+                    </div>
+                    <div class="form-input">
+                        <input type="password" class="pass2" placeholder="Confim Password">
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error</small>
+                    </div>
+                    <button class="btn btn2 btn3">Register</button>
+                </form>
+            </div> 
+        </div>
+    </section>
+    
+    
+    <script>
+        const signInBtn = document.querySelector('.sign-in-btn');
+        const signUpBtn = document.querySelector('.sign-up-btn');
+        const formBox = document.querySelector('.form-box');
+        const username = document.querySelector('.username');
+        const email = document.querySelector('.email');
+        const passwowd = document.querySelector('.pass');
+        const passwordCheck = document.querySelector('.pass2');
+        const body = document.querySelector('body');
+        const form = document.querySelector('#form');
+
+
+
+        signUpBtn.addEventListener('click', () =>{
+            formBox.classList.add('active');
+            body.classList.add('active');
+        })
+        
+        signInBtn.addEventListener('click', () =>{
+            formBox.classList.remove('active');
+            body.classList.remove('active');
+        })
+
+        form.addEventListener('submit', (e)=>{
+            e.preventDefault();
+            checkInputs();
+        })
+
+
+        function checkInputs(){
+            const usernameValue = username.value.trim();  
+            const emailValue = email.value.trim(); 
+            const passwordValue = passwowd.value.trim(); 
+            const password2Value  = passwordCheck.value.trim(); 
+
+            if(usernameValue === ''){
+                setErrorFor(username, 'Username cannot be empty!');
+            }
+            else{
+                setSuccessFor(username);
+            }
+            if(emailValue === ''){
+                setErrorFor(email, 'Email cannot be empty!');
+            }
+            else{
+                setSuccessFor(email);
+            }
+            if(passwordValue === ''){
+                setErrorFor(passwowd, 'Password cannot be empty!');
+            }
+            else{
+                setSuccessFor(passwowd);
+            }
+            if(password2Value === ''){
+                setErrorFor(passwordCheck, 'Password Check cannot be empty!');
+            }
+            else if(password2Value != passwordValue){
+                setErrorFor(passwordCheck, 'Password does not match!')
+            }
+            else{
+                setSuccessFor(passwordCheck);
+            }
+            
+            
+        }
+
+
+        function setErrorFor(input, message){
+            // console.log('empty')
+            const parent = input.parentElement;
+            const errorMessage = parent.querySelector('small');
+            
+            errorMessage.textContent = message;
+            parent.classList.add('error');
+        }
+        
+        function setSuccessFor(input){
+            // console.log('not empty')
+            const parent = input.parentElement;
+            const errorMessage = parent.querySelector('small');
+            
+            parent.classList = 'form-input success';
+        }
+        
+        
+        
+        
+    </script>
+</body>
+</html>
